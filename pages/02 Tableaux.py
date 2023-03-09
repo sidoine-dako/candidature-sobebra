@@ -2,24 +2,19 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import geopandas as gpd
 from scripts.dataSelector import DataSelector
 from scripts.dataCalculator import DataCalculator
 
 # Set up the page
-st.set_page_config(page_title="Cartes")
+st.set_page_config(page_title="Tableaux")
 
 # Page content
 st.title("Projet de candidature | Data analyst SOBEBRA")
 st.markdown("*Proposé par Sidoine Aude Sèdami DAKO*")
-st.markdown("# Cartes")
+st.markdown("# Tableaux")
 
 ## Data importation
 df = pd.read_excel("./data/completeData.xlsx")
-shpDep = gpd.read_file("./data/beninDepartment.shp")
-shpDep = shpDep.loc[:,["geometry","adm1_name"]]
-shpComm = gpd.read_file("./data/beninCommune.shp")
-shpComm = shpComm.loc[:,["geometry","adm2_name"]]
 
 # Sidebar
 sdBar = st.sidebar
@@ -40,6 +35,7 @@ with sdBar.expander("Type"):
     typeChoice = st.multiselect("Type",typeLst,default=typeLst,label_visibility="hidden")
 
 
+
 # Dropdown list
 with st.expander("Description",expanded=True):
         st.markdown("""
@@ -58,15 +54,21 @@ dataSel = DataSelector(df)
 dataSel.extractDepartement(depChoice)
 dataSel.extractCommune(commChoice)
 dataSel.extractType(typeChoice)
-_, colGlobRat = st.columns([7,2])
 dataCalc = DataCalculator(dataSel.df)
+_, colGlobRat = st.columns([7,2])
 globRatio = dataCalc.computeRatio()
 colGlobRat.metric("Ratio global",value=globRatio,help="Nombre de PDVs désservis par 1 dépôt en moyenne")
 
 ## Performances par département
 with st.expander("Performances par département"):
     st.markdown("**Ratio 1 Dépôt\:PDVs**")
-    ratioDep = dataCalc.computeRatio("Département").sort_values(by="Ratio",ascending=False)
-    # Create shapefile with ratio
-    ratioDepShp = pd.merge(shpDep,ratioDep,how="left",left_on="adm1_name",right_on="Département")
-    st.write(ratioDepShp)
+    st.write(dataCalc.computeRatio("Département").sort_values(by="Ratio",ascending=False))
+    st.markdown("**Performances agrégées par département**")
+    st.write(dataCalc.aggData("Département"))
+
+## Performances par commune
+with st.expander("Performances par commune"):
+    st.markdown("**Ratio 1 Dépôt\:PDVs**")
+    st.write(dataCalc.computeRatio("Commune").sort_values(by="Ratio",ascending=False))
+    st.markdown("**Performances agrégées par commune**")
+    st.write(dataCalc.aggData("Commune"))
