@@ -7,7 +7,6 @@ st.set_page_config(page_title="Documentation")
 # Page content
 st.title("Projet de candidature | Data analyst SOBEBRA")
 st.markdown("""*Proposé par Sidoine Aude Sèdami DAKO*\\
-    *Date de début du projet: Lundi 06 Mars 2023*
 """)
 st.markdown("""
     Si vous êtes sur cette page, c'est que le lien de redirection et/ou le QR Code inséré a suscité votre intérêt.\\
@@ -16,8 +15,8 @@ st.markdown("""
     # Documentation
     Ce tableau de bord possède trois pages:
     - **Documentation :** explique le projet élaboré
-    - **Tableaux :** présente les performances de chaque point de vente (PDV) et dépôt
     - **Cartes :** présente un aperçu schématisé de la répartition géographique des PDVs et dépôts au Bénin
+    - **Tableaux :** présente les performances de chaque point de vente (PDV) et dépôt
 
     Sur chacune des pages, vous trouverez une description plus approfondie des fonctionnalités utilisées.
 
