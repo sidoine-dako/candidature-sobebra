@@ -23,3 +23,10 @@ class DataSelector:
         df = df.loc[df.loc[:,"Type"].isin(lst)]
         self.df = df
         return self.df
+    
+    def separateType(self):
+        """Fonction permettant de séparer les dépôts des PDVs"""
+        df = self.df
+        dfDepot = df.loc[df.loc[:,"Type"] == "Dépôt"]
+        dfPDV = df.loc[df.loc[:,"Type"] == "PDV"]
+        return dfDepot, dfPDV
