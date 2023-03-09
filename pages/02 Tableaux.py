@@ -1,17 +1,8 @@
 # Libraries importation
 import streamlit as st
 import pandas as pd
-import numpy as np
-import sys
-
-try:     
-    sys.path.append('../scripts/')
-    from dataSelector import DataSelector
-    from dataCalculator import DataCalculator
-except:
-    sys.path.append('./scripts/')
-    from dataSelector import DataSelector
-    from dataCalculator import DataCalculator
+from scripts.dataSelector import DataSelector
+from scripts.dataCalculator import DataCalculator
 
 # Set up the page
 st.set_page_config(page_title="Tableaux")
