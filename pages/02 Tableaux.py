@@ -1,8 +1,12 @@
 # Libraries importation
 import streamlit as st
 import pandas as pd
-from scripts.dataSelector import DataSelector
-from scripts.dataCalculator import DataCalculator
+# from scripts.dataSelector import DataSelector
+# from scripts.dataCalculator import DataCalculator
+import sys
+sys.path.append("scripts")
+from dataSelector import DataSelector
+from dataCalculator import DataCalculator
 
 # Set up the page
 def main():
