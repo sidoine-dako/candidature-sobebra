@@ -10,7 +10,6 @@ st.set_page_config(page_title="Tableaux")
 # Page content
 st.title("Projet de candidature | Data analyst SOBEBRA")
 st.markdown("""*Proposé par Sidoine Aude Sèdami DAKO*\\
-    *Date de début du projet: Lundi 06 Mars 2023*\\
     **Important : Les données utilisées pour ce projet ont été générées aléatoirement donc fictives.**
 """)
 st.markdown("# Tableaux")
@@ -20,6 +19,10 @@ df = pd.read_excel("./data/completeData.xlsx")
 
 # Sidebar
 sdBar = st.sidebar
+sdBar.title("Barre latérale")
+sdBar.write("""Avec les éléments contenus dans cette barre, vous avez la possibilité de choisir
+les segments sur lesquels vous focalisez. Assurez-vous de maintenir choisis quelques éléments pour avoir
+des résultats.""")
 
 depLst = sorted(df["Département"].unique()) # List of "Département"
 ## Départements

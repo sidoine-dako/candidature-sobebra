@@ -17,7 +17,6 @@ st.set_page_config(page_title="Cartes")
 # Page content
 st.title("Projet de candidature | Data analyst SOBEBRA")
 st.markdown("""*Proposé par Sidoine Aude Sèdami DAKO*\\
-    *Date de début du projet: Lundi 06 Mars 2023*\\
     **Important : Les données utilisées pour ce projet ont été générées aléatoirement donc fictives.**
 """)
 st.markdown("# Cartes")
@@ -31,7 +30,10 @@ shpComm = shpComm.loc[:,["geometry","adm2_name"]]
 
 # Sidebar
 sdBar = st.sidebar
-
+sdBar.title("Barre latérale")
+sdBar.write("""Avec les éléments contenus dans cette barre, vous avez la possibilité de choisir
+les segments sur lesquels vous focalisez. Assurez-vous de maintenir choisis quelques éléments pour avoir
+des résultats.""")
 depLst = sorted(df["Département"].unique()) # List of "Département"
 ## Départements
 with sdBar.expander('Départements'):
@@ -94,7 +96,7 @@ with st.expander("Répartition spatiale des dépôts et PDVs"):
      folium.map.LayerControl('topleft', collapsed= False).add_to(m1)
      m1.fit_bounds(m1.get_bounds())
      m1_folium = st_folium(m1)
-     st.write(dfDepot)
+     #st.write(dfDepot)
 
 ## Performances par département
 with st.expander("Performances par département"):
