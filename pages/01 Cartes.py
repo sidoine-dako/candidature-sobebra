@@ -7,9 +7,9 @@ import folium
 import leafmap.foliumap as leafmap
 from folium.plugins import MarkerCluster
 from streamlit_folium import st_folium
-from scripts.dataSelect import DataSelector
-from scripts.dataCalculate import DataCalculator
-from scripts.modifyMap import markersMap
+from utils.dataSelect import DataSelector
+from utils.dataCalculate import DataCalculator
+from utils.modifyMap import markersMap
 
 # Set up the page
 st.set_page_config(page_title="Cartes")

@@ -1,8 +1,8 @@
 # Libraries importation
 import streamlit as st
 import pandas as pd
-from scripts.dataSelect import DataSelector
-from scripts.dataCalculate import DataCalculator
+from utils.dataSelect import DataSelector
+from utils.dataCalculate import DataCalculator
 
 # Set up the page
 st.set_page_config(page_title="Tableaux")
