@@ -4,3 +4,5 @@ numpy == 1.24.1
 folium == 0.13.0
 streamlit-folium == 0.11.0
 geopandas == 0.12.2
+matplotlib == 3.5.1
+mapclassify == 2.5.0
