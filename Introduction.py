@@ -6,7 +6,7 @@ st.set_page_config(page_title="Documentation")
 
 # Page content
 st.title("Projet de candidature | Data analyst SOBEBRA")
-st.markdown("""*Proposé par Sidoine Aude Sèdami DAKO*\\
+st.markdown("""*Proposé par Sidoine Aude Sèdami DAKO*
 """)
 st.markdown("""
     Si vous êtes sur cette page, c'est que le lien de redirection et/ou le QR Code inséré a suscité votre intérêt.\\
