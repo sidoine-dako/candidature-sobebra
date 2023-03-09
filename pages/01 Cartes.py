@@ -9,11 +9,16 @@ from folium.plugins import MarkerCluster
 from streamlit_folium import st_folium
 
 import sys
-
-sys.path.append('../scripts')
-from dataSelector import DataSelector
-from dataCalculator import DataCalculator
-from modifyMap import markersMap
+try:     
+    sys.path.append('../scripts/')
+    from dataSelector import DataSelector
+    from dataCalculator import DataCalculator
+    from modifyMap import markersMap
+except:
+    sys.path.append('./scripts/')
+    from dataSelector import DataSelector
+    from dataCalculator import DataCalculator
+    from modifyMap import markersMap
 
 # Set up the page
 st.set_page_config(page_title="Cartes")
