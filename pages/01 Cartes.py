@@ -7,9 +7,14 @@ import folium
 import leafmap.foliumap as leafmap
 from folium.plugins import MarkerCluster
 from streamlit_folium import st_folium
-from scripts.dataSelector import DataSelector
-from scripts.dataCalculator import DataCalculator
-from scripts.modifyMap import markersMap
+#from scripts.dataSelector import DataSelector
+#from scripts.dataCalculator import DataCalculator
+#from scripts.modifyMap import markersMap
+import sys
+sys.path.append("scripts")
+import dataSelector
+import dataCalculator
+import modifyMap
 
 # Set up the page
 def main():
@@ -63,12 +68,12 @@ def main():
                 chacun des dépôts et par conséquent déterminer avec exactitude le nombre moyen de PDVs 
                 désservis par un dépôt en particulier.
             """)
-    dataSel = DataSelector(df)
+    dataSel = dataSelector.DataSelector(df)
     dataSel.extractDepartement(depChoice)
     dataSel.extractCommune(commChoice)
     dataSel.extractType(typeChoice)
     _, colGlobRat = st.columns([7,2])
-    dataCalc = DataCalculator(dataSel.df)
+    dataCalc = dataCalculator.DataCalculator(dataSel.df)
     globRatio = dataCalc.computeRatio()
     colGlobRat.metric("Ratio global",value=globRatio,help="Nombre de PDVs désservis par 1 dépôt en moyenne")
 
@@ -86,11 +91,11 @@ def main():
         m1 = folium.Map(location=[9.223351, 2.262477],zoom_start=6.5)
         clusterDepot = MarkerCluster(name="Dépôts").add_to(m1)
         #fg = folium.FeatureGroup(name="Dépôts")
-        markersMap(dfDepot,clusterDepot,"#1A8EFA")
+        modifyMap.markersMap(dfDepot,clusterDepot,"#1A8EFA")
         #m1.add_child(fg)
         clusterPDV = MarkerCluster(name="PDVs").add_to(m1)
         #fg2 = folium.FeatureGroup(name="PDVs")
-        markersMap(dfPDV,clusterPDV,"#DB6A39")
+        modifyMap.markersMap(dfPDV,clusterPDV,"#DB6A39")
         #m1.add_child(fg2)
         folium.map.LayerControl('topleft', collapsed= False).add_to(m1)
         m1.fit_bounds(m1.get_bounds())

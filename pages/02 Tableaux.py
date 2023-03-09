@@ -5,8 +5,8 @@ import pandas as pd
 # from scripts.dataCalculator import DataCalculator
 import sys
 sys.path.append("scripts")
-from dataSelector import DataSelector
-from dataCalculator import DataCalculator
+import dataSelector
+import dataCalculator
 
 # Set up the page
 def main():
@@ -57,11 +57,11 @@ def main():
                 chacun des dépôts et par conséquent déterminer avec exactitude le nombre moyen de PDVs 
                 désservis par un dépôt en particulier.
             """)
-    dataSel = DataSelector(df)
+    dataSel = dataSelector.DataSelector(df)
     dataSel.extractDepartement(depChoice)
     dataSel.extractCommune(commChoice)
     dataSel.extractType(typeChoice)
-    dataCalc = DataCalculator(dataSel.df)
+    dataCalc = dataCalculator.DataCalculator(dataSel.df)
     _, colGlobRat = st.columns([7,2])
     globRatio = dataCalc.computeRatio()
     colGlobRat.metric("Ratio global",value=globRatio,help="Nombre de PDVs désservis par 1 dépôt en moyenne")
