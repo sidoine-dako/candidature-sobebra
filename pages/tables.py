@@ -2,7 +2,6 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import geopandas as gpd
 from scripts.dataSelector import DataSelector
 from scripts.dataCalculator import DataCalculator
 
@@ -15,8 +14,6 @@ st.markdown("*Proposé par Sidoine Aude Sèdami DAKO*")
 
 ## Data importation
 df = pd.read_excel("./data/completeData.xlsx")
-shpDep = gpd.read_file("./data/beninCommune.shp")
-shpDep = shpDep.loc[:,["geometry","adm2_name"]]
 
 # Sidebar
 sdBar = st.sidebar
@@ -74,5 +71,3 @@ with st.expander("Performances par commune"):
     st.write(dataCalc.computeRatio("Commune").sort_values(by="Ratio",ascending=False))
     st.markdown("**Performances agrégées par commune**")
     st.write(dataCalc.aggData("Commune"))
-
-st.write(shpDep)
