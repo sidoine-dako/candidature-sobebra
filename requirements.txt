@@ -6,3 +6,4 @@ streamlit-folium == 0.11.0
 geopandas == 0.12.2
 matplotlib == 3.5.1
 mapclassify == 2.5.0
+leafmap == 0.12.1
