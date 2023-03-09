@@ -16,7 +16,10 @@ st.set_page_config(page_title="Cartes")
 
 # Page content
 st.title("Projet de candidature | Data analyst SOBEBRA")
-st.markdown("*Proposé par Sidoine Aude Sèdami DAKO*")
+st.markdown("""*Proposé par Sidoine Aude Sèdami DAKO*\\
+    *Date de début du projet: Lundi 06 Mars 2023*\\
+    **Important : Les données utilisées pour ce projet ont été générées aléatoirement donc fictives.**
+""")
 st.markdown("# Cartes")
 
 ## Data importation
@@ -72,11 +75,23 @@ colGlobRat.metric("Ratio global",value=globRatio,help="Nombre de PDVs désservis
 with st.expander("Répartition spatiale des dépôts et PDVs"):
      st.markdown("""La carte ci-dessous est interactive. En cliquant sur un point,
      vous avez la possibilité d'avoir les informations définies telles que le nom, le RCCM,
-     le nombre de bouteilles d'eau, de boissons gazeuses, de bières, etc.""")
+     le nombre de bouteilles d'eau, de boissons gazeuses, de bières, etc.\\
+     En cliquant sur les points aggrégés, vou savez la possibilité de sélectionner chacun des points
+     en individuel.
+     Les dépôts sont colorés en bleus et les PDVs en rouge.
+     """)
+
      dfDepot, dfPDV = dataSel.separateType()
      m1 = folium.Map(location=[9.223351, 2.262477],zoom_start=6.5)
-     #clusterDepot = MarkerCluster(name="Dépôts").add_to(m1)
-     markersMap(dfDepot,m1,"#1A8EFA")
+     clusterDepot = MarkerCluster(name="Dépôts").add_to(m1)
+     #fg = folium.FeatureGroup(name="Dépôts")
+     markersMap(dfDepot,clusterDepot,"#1A8EFA")
+     #m1.add_child(fg)
+     clusterPDV = MarkerCluster(name="PDVs").add_to(m1)
+     #fg2 = folium.FeatureGroup(name="PDVs")
+     markersMap(dfPDV,clusterPDV,"#DB6A39")
+     #m1.add_child(fg2)
+     folium.map.LayerControl('topleft', collapsed= False).add_to(m1)
      m1.fit_bounds(m1.get_bounds())
      m1_folium = st_folium(m1)
      st.write(dfDepot)
@@ -84,7 +99,7 @@ with st.expander("Répartition spatiale des dépôts et PDVs"):
 ## Performances par département
 with st.expander("Performances par département"):
     st.markdown("""La carte ci-dessous est interactive. En passant le curseur de la souris,
-    vous avez la possibilité de voir""")
+    vous avez la possibilité de voir les ratios dépôt pour PDV.""")
     st.markdown("**Ratio 1 Dépôt\:PDVs**")
     ratioDep = dataCalc.computeRatio("Département").sort_values(by="Ratio",ascending=False)
     # Create shapefile with ratio

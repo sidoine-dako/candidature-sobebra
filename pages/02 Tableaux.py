@@ -10,7 +10,10 @@ st.set_page_config(page_title="Tableaux")
 
 # Page content
 st.title("Projet de candidature | Data analyst SOBEBRA")
-st.markdown("*Proposé par Sidoine Aude Sèdami DAKO*")
+st.markdown("""*Proposé par Sidoine Aude Sèdami DAKO*\\
+    *Date de début du projet: Lundi 06 Mars 2023*\\
+    **Important : Les données utilisées pour ce projet ont été générées aléatoirement donc fictives.**
+""")
 st.markdown("# Tableaux")
 
 ## Data importation
@@ -64,11 +67,35 @@ with st.expander("Performances par département"):
     st.markdown("**Ratio 1 Dépôt\:PDVs**")
     st.write(dataCalc.computeRatio("Département").sort_values(by="Ratio",ascending=False))
     st.markdown("**Performances agrégées par département**")
-    st.write(dataCalc.aggData("Département"))
+    dfDep = dataCalc.aggData("Commune")
+    dfDep.drop(columns=["Latitude","Longitude"],inplace=True)
+    st.write(dfDep.sort_values(by="Total"))
 
 ## Performances par commune
 with st.expander("Performances par commune"):
     st.markdown("**Ratio 1 Dépôt\:PDVs**")
     st.write(dataCalc.computeRatio("Commune").sort_values(by="Ratio",ascending=False))
     st.markdown("**Performances agrégées par commune**")
-    st.write(dataCalc.aggData("Commune"))
+    dfComm = dataCalc.aggData("Commune")
+    dfComm.drop(columns=["Latitude","Longitude"],inplace=True)
+    st.write(dfComm.sort_values(by="Total"))
+
+dfDepot, dfPDV = dataSel.separateType()
+
+## Performances des dépôts
+with st.expander("Performances des dépôts"):
+     st.markdown("""
+        Cette section présente dans un tableau les performances de chaque dépôt. En cliquant
+        sur l'en-tête d'une colonne, celle-ci est ordonnée par ordre croissant ou décroissant.
+     """)
+     dfDepot.drop(columns=["Longitude","Latitude","Type"],inplace=True)
+     st.write(dfDepot.sort_values(by="Total",ascending=False))
+
+## Performances des PDVs
+with st.expander("Performances des PDVs"):
+     st.markdown("""
+        Cette section présente dans un tableau les performances de chaque PDV. En cliquant
+        sur l'en-tête d'une colonne, celle-ci est ordonnée par ordre croissant ou décroissant.
+     """)
+     dfPDV.drop(columns=["Longitude","Latitude","Type"],inplace=True)
+     st.write(dfPDV.sort_values(by="Total",ascending=False))
