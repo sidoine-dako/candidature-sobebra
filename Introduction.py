@@ -24,5 +24,9 @@ st.markdown("""
     - **Langage de programmation :** Python
     - **Données :** Format Excel, Données géospatiales shp
 
+    Si vous utilisez un téléphone, veuillez toucher la flèche dans l'angle haut gauche pour avoir accès au menu.
+
+    Avec un ordinateur, le menu et la barre latérale se trouvent à gauche.
+
     **Important : Les données utilisées pour ce projet ont été générées aléatoirement donc fictives.**
 """)
