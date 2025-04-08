@@ -69,8 +69,8 @@ with st.expander("Performances par département"):
     st.markdown("**Ratio 1 Dépôt\:PDVs**")
     st.write(dataCalc.computeRatio("Département").sort_values(by="Ratio",ascending=False))
     st.markdown("**Performances agrégées par département**")
-    dfDep = dataCalc.aggData("Commune")
-    dfDep.drop(columns=["Latitude","Longitude"],inplace=True)
+    dfDep = dataCalc.aggData("Département")
+    dfDep.drop(columns=["Latitude","Longitude","Nom","Commune","RCCM","Type"],inplace=True)
     st.write(dfDep.sort_values(by="Total"))
 
 ## Performances par commune
@@ -79,7 +79,7 @@ with st.expander("Performances par commune"):
     st.write(dataCalc.computeRatio("Commune").sort_values(by="Ratio",ascending=False))
     st.markdown("**Performances agrégées par commune**")
     dfComm = dataCalc.aggData("Commune")
-    dfComm.drop(columns=["Latitude","Longitude"],inplace=True)
+    dfComm.drop(columns=["Latitude","Longitude","Nom","Département","RCCM","Type"],inplace=True)
     st.write(dfComm.sort_values(by="Total"))
 
 dfDepot, dfPDV = dataSel.separateType()

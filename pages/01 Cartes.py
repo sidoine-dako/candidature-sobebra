@@ -95,7 +95,7 @@ with st.expander("Répartition spatiale des dépôts et PDVs"):
      #m1.add_child(fg2)
      folium.map.LayerControl('topleft', collapsed= False).add_to(m1)
      m1.fit_bounds(m1.get_bounds())
-     m1_folium = st_folium(m1)
+     m1_folium = st_folium(m1,height=725)
      #st.write(dfDepot)
 
 ## Performances par département
@@ -111,7 +111,7 @@ with st.expander("Performances par département"):
     #folium.TileLayer('CartoDB positron',name="Light Map",control=False).add_to(m)
 
     myscale = (ratioDepShp['Ratio'].quantile((0,0.25,0.5,0.75,1))).tolist()
-    m.choropleth(
+    folium.Choropleth(
         geo_data=ratioDepShp,
         name='Choropleth',
         data=ratioDepShp,
@@ -123,7 +123,7 @@ with st.expander("Performances par département"):
         line_opacity=0.2,
         legend_name='Ratio Dépôt:PDVs',
         smooth_factor=0
-    )
+    ).add_to(m)
 
     style_function = lambda x: {'fillColor': '#ffffff', 
                             'color':'#000000', 
